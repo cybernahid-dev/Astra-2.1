@@ -29,14 +29,14 @@ Make sure Python ≥ 3.9 and `pip` are installed.
 #### 🐧 Linux / Termux:
 
 pkg install python git -y
-git clone https://github.com/cybernahid-dev/Astra-2.1.git
+git clone https://github.com/cybernahid-dev/Astra.git
 cd Astra-2.1
 pip install -r requirements.txt
 
 
 ### 🪟 Windows:
 
-git clone https://github.com/cybernahid-dev/Astra-2.1.git
+git clone https://github.com/cybernahid-dev/Astra.git
 cd Astra-2.1
 pip install -r requirements.txt
 
