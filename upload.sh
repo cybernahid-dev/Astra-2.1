@@ -1,49 +1,42 @@
 #!/bin/bash
-# ============================================================
-#  Astra 2.1 Auto Upload Script
-#  Created by cybernahid-dev
-# ============================================================
+# =========================================
+# 🚀 Astra 2.1 Secure Upload Script (SSH)
+# Author: cybernahid-dev
+# License: MIT
+# Year: 2025
+# =========================================
 
-echo "🚀 Starting Astra 2.1 Upload Process..."
+echo "🌌 Starting Astra 2.1 Secure Upload via SSH..."
 
-# Check internet connection
-if ! ping -c 1 github.com &>/dev/null; then
-  echo "❌ No internet connection! Please connect and try again."
-  exit 1
-fi
+# === Basic Git Config ===
+git config --global user.name "cybernahid-dev"
+git config --global user.email "youremail@example.com"   # তোমার GitHub ইমেইল দাও
 
-# Go to project directory
-cd "$(dirname "$0")" || exit
-
-# Check if .git exists
+# === Initialize Git if needed ===
 if [ ! -d ".git" ]; then
-  echo "🧩 Git not initialized. Initializing now..."
-  git init
-  git branch -M main
+    echo "🌀 Initializing new Git repository..."
+    git init
 fi
 
-# Check user identity
-if ! git config user.name >/dev/null; then
-  git config --global user.name "cybernahid-dev"
-  git config --global user.email "githubnahid@gmail.com"
-  echo "✅ Git user configured."
+# === Set main branch ===
+git branch -M main
+
+# === Ensure SSH remote is set ===
+if git remote | grep -q "origin"; then
+    echo "🔄 Updating remote origin..."
+    git remote set-url origin git@github.com:cybernahid-dev/Astra-2.1.git
+else
+    echo "🌐 Adding remote origin..."
+    git remote add origin git@github.com:cybernahid-dev/Astra-2.1.git
 fi
 
-# Add all files
+# === Add & Commit Changes ===
+echo "📦 Adding and committing all changes..."
 git add .
+git commit -m "Auto upload — $(date '+%Y-%m-%d %H:%M:%S')" || echo "✅ No new changes to commit."
 
-# Commit with timestamp
-commit_msg="Auto update - $(date '+%Y-%m-%d %H:%M:%S')"
-git commit -m "$commit_msg"
-
-# Check remote URL
-if ! git remote | grep -q origin; then
-  echo "⚙️ Adding remote origin..."
-  git remote add origin https://github.com/cybernahid-dev/Astra-2.1.git
-fi
-
-# Push to GitHub
-echo "⬆️ Uploading files to GitHub..."
+# === Push to GitHub ===
+echo "🚀 Pushing to GitHub (SSH method)..."
 git push -u origin main
 
-echo "✅ Upload completed successfully!"
+echo "✅ Upload complete! Astra 2.1 is now synced to GitHub."
